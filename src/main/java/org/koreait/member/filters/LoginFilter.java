@@ -59,8 +59,9 @@ public class LoginFilter extends GenericFilterBean {
             HttpEntity<Void> request = new HttpEntity<>(headers);
 
             ResponseEntity<JSONData> response = restTemplate.exchange(apiUrl, HttpMethod.GET, request, JSONData.class);
-            System.out.println("----- response ------");
-            System.out.println(response);
+            if (response.getStatusCode().is2xxSuccessful()) { // 응답 성공시 처리
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
