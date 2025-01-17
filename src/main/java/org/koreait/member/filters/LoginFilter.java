@@ -39,6 +39,8 @@ public class LoginFilter extends GenericFilterBean {
         try {
             String apiUrl = utils.serviceUrl("member-service", "/info");
 
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

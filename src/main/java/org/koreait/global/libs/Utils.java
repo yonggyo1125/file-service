@@ -92,6 +92,7 @@ public class Utils {
     public String serviceUrl(String serviceId, String url) {
         try {
             List<ServiceInstance> instances = discoveryClient.getInstances(serviceId);
+            System.out.println("instance:" + instances);
             String profile = System.getenv("spring.profiles.active");
             boolean isDev = StringUtils.hasText(profile) && profile.contains("dev");
             String serviceUrl = null;
