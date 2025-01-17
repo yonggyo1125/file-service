@@ -158,4 +158,5 @@ public class FileController {
     public void select(@PathVariable("seq") Long seq) {
         imageService.select(seq);
     }
+
 }
