@@ -18,6 +18,7 @@ public class Member implements UserDetails {
     private Long seq;
     private String email;
     private String name;
+
     @JsonAlias("authorities")
     private List<Authority> _authorities;
 
