@@ -8,10 +8,14 @@ import jakarta.servlet.ServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.koreait.global.libs.Utils;
 import org.koreait.global.rests.JSONData;
+import org.koreait.member.Member;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
@@ -59,9 +63,17 @@ public class LoginFilter extends GenericFilterBean {
             HttpEntity<Void> request = new HttpEntity<>(headers);
 
             ResponseEntity<JSONData> response = restTemplate.exchange(apiUrl, HttpMethod.GET, request, JSONData.class);
-            if (response.getStatusCode().is2xxSuccessful()) { // 응답 성공시 처리
+            JSONData jsonData = response.getBody();
+            if (response.getStatusCode().is2xxSuccessful() && jsonData != null && jsonData.isSuccess()) { // 응답 성공시 처리
+                String json = om.writeValueAsString(jsonData.getData());
 
-            }
+                Member member = om.readValue(json, Member.class);
+
+                Authentication authentication = new UsernamePasswordAuthenticationToken(member, null, member.getAuthorities());
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            } // endif
 
         } catch (Exception e) {
             e.printStackTrace();
