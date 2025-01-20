@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles({"default", "test", "dev"})
-public class FileControllerTest {
+public class FileControllerTest { // 변경!!!
 
     @Autowired
     private MockMvc mockMvc;
