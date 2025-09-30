@@ -10,4 +10,5 @@ ENV FILE_PATH=/uploads
 
 ENTRYPOINT ["java", "-jar", "-Ddb.url=${DB_URL}", "-Ddb.username=${DB_USERNAME}", "-Ddb.password=${DB_PASSWORD}", "-Dfile.url=${FILE_URL}","-Dfile.path=${FILE_PATH}", "app.jar"]
 
+
 EXPOSE 3000
