@@ -18,7 +18,7 @@ public class FileController {
 
     @PostMapping("/upload")
     public List<FileInfoResponse> upload(@RequestPart(name="file", required = false) MultipartFile[] files, @Valid FileUploadRequest requestDto, Errors errors) {
-
+        System.out.println(requestDto);
         if (errors.hasErrors()) {
 
             return null; // 보류
